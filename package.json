@@ -4,7 +4,10 @@
   "description": "bot for discord",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "cover": "istanbul cover --report html --report cobertura node_modules/mocha/bin/_mocha -- -R spec --recursive src/**/*.test.js",
+    "lint": "eslint --ignore-pattern public --ignore-pattern api-docs --ignore-pattern coverage .",
+    "test": "mocha --reporter spec src/**/*.test.js"
   },
   "repository": {
     "type": "git",
@@ -28,6 +31,7 @@
   },
   "devDependencies": {
     "eslint": "^4.1.1",
+    "istanbul": "^0.4.5",
     "mocha": "^3.4.2"
   }
 }
