@@ -14,5 +14,3 @@ script:
   - npm run lint
   - npm test
   - npm run cover
-before_deploy: true
-deploy: true
