@@ -11,6 +11,7 @@ addons:
       - ubuntu-toolchain-r-test
     packages:
       - g++-4.8
+      - libgif-dev
 before_install:
   - npm i -g npm@5.2.0
 cache:
