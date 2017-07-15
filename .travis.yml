@@ -38,7 +38,7 @@ script:
   - mkdir -p bot_upload
   - mv latest.zip bot_upload/latest.zip
 notification:
-  discord: `$DISCORD_WEBHOOK_ID:$DISCORD_WEBHOOK_TOKEN`
+  discord: $DISCORD_WEBHOOK_ID:$DISCORD_WEBHOOK_TOKEN
   pull_request_template:
     - 'Build [#%{build_number}](%{build_url}) ([%{commit}](%{compare_url})) of %{repository}@%{branch} in PR [#%{pull_request_number}](%{pull_request_url}) by %{author} %{result} in %{duration}'
   branch_template:
