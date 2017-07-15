@@ -12,7 +12,7 @@ addons:
     packages:
       - g++-4.8
 before_install:
-  - npm i -g npm@5.0.4
+  - npm i -g npm@5.2.0
 cache:
   directories:
     - "node_modules"
@@ -22,3 +22,15 @@ script:
   - npm run lint
   - npm test
   - npm run cover
+deploy:
+- provider: s3
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
+  local_dir: bot_upload
+  skip_cleanup: true
+  bucket: discordbot-builds
+  region: us-east-1
+script:
+  - zip -r latest *
+  - mkdir -p bot_upload
+  - mv latest.zip bot_upload/latest.zip
