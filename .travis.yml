@@ -34,7 +34,7 @@ deploy:
   bucket: discordbot-builds
   region: us-east-1
 script:
-  - zip -r latest *
+  - zip -r latest * -x node_modules/\*
   - mkdir -p bot_upload
   - mv latest.zip bot_upload/latest.zip
 notifications:
