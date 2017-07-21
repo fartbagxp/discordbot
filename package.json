@@ -16,18 +16,18 @@
   "keywords": [
     "discord"
   ],
-  "author": "",
+  "author": "fartbagxp",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/fartbagxp/discordbot/issues"
   },
   "homepage": "https://github.com/fartbagxp/discordbot#readme",
   "dependencies": {
-    "discord-spoiler-bot": "^2.0.5",
+    "debug": "^2.6.8",
     "discord.js": "^11.1.0",
     "dotenv": "^4.0.0",
-    "lodash": "^4.17.4",
-    "node-opus": "^0.2.6"
+    "node-opus": "^0.2.6",
+    "redis": "^2.7.1"
   },
   "devDependencies": {
     "eslint": "^4.1.1",

@@ -1,5 +1,6 @@
-const SpoilerBot = require('discord-spoiler-bot');
 const dotenv = require('dotenv');
+const chat = require('./src/chat');
+require('./src/filter');
 
 dotenv.config();
 
@@ -7,7 +8,5 @@ let config = {
   token: process.env.DISCORD_BOT_TOKEN,
 };
 
-process.on('unhandledRejection', console.error);
+chat.start(config.token);
 
-let bot = new SpoilerBot(config);
-bot.connect();
