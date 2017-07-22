@@ -13,6 +13,9 @@ broadcast.events = {
   // IncomingMessageEvent signifies all incoming messages to the bot
   IncomingMessageEvent: 'IncomingMessageEvent',
 
+  // IncomingReactionEvent signifies all incoming reactions to the bot
+  IncomingReactionEvent: 'IncomingReactionEvent',
+
   // OutgoingMessageEvent signifies all outgoing messages from the bot
   OutgoingMessageEvent: 'OutgoingMessageEvent',
 

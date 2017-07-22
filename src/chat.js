@@ -19,8 +19,14 @@ client.on('message', msg => {
   if(msg.author.bot) {
     return;
   }
-
   Broadcast.incomingEE.emit(Broadcast.events.IncomingMessageEvent, msg);
+});
+
+client.on('messageReactionAdd', (reaction, user) => {
+  if(user.bot) {
+    return;
+  }
+  Broadcast.incomingEE.emit(Broadcast.events.IncomingReactionEvent, reaction, user);
 });
 
 chat.start = (token) => {
