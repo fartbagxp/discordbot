@@ -20,12 +20,15 @@ listener.react = (reaction, user) => {
 
   if(data && data.emote === reaction.emoji.id) {
     user.createDM()
-    .then((channel) => {
-      channel.send(`Spoilers regarding **${data.title}**: ${data.spoiler}`);
-    })
-    .catch((err) => {
-      console.error('Failed to send to user: ', user.username, err);
-    });
+      .then((channel) => {
+        return channel.send(`Spoilers regarding **${data.title}**: ${data.spoiler}`);
+      })
+      .catch(() => {
+        return reaction.message.channel.send(`Cannot send private messages to ${user.username}`);
+      })
+      .catch((err) => {
+        console.error('Failed to send any messages: ', user.username, err);
+      });
   }
 };
 

@@ -1,6 +1,6 @@
 # Overview
 
-[![Build Status](https://travis-ci.org/fartbagxp/discordbot.svg?branch=master)]
+![Build Status](https://travis-ci.org/fartbagxp/discordbot.svg?branch=master)
 
 This is random project for a bot in a discord channel.
 
