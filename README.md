@@ -6,9 +6,11 @@ This is random project for a bot in a discord channel.
 
 It currently tries to coverup spoilers by deleting the spoiler message, and sending people whispers if they react to the message.
 
-## Setup
+## Prerequisite
 
-The bot is written in [NodeJS](https://nodejs.org/en/). It will work on version 6 and above.
+The bot is written in [NodeJS](https://nodejs.org/en/). Install the latest version (version 8).
+
+[Redis](https://redis.io) is also needed for data storage.
 
 ### Getting Discord Credentials
 
@@ -28,6 +30,8 @@ Once you cloned this project, you can run it using the following commands.
 Run `npm install`
 
 Run `npm start`
+
+Reaction messages are stored in [Redis](https://redis.io) so that upon restarting, the bot will fetch previous spoilers and sync itself up with it.
 
 ## Usage
 
