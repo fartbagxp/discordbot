@@ -37,11 +37,7 @@ script:
   - zip -r latest * -x node_modules/\*
   - mkdir -p bot_upload
   - mv latest.zip bot_upload/latest.zip
-notifications:
-  discord:
-    channels:
-      - $DISCORD_WEBHOOK_ID:$DISCORD_WEBHOOK_TOKEN
-    pull_request_template:
-      - 'Build [#%{build_number}](%{build_url}) ([%{commit}](%{compare_url})) of %{repository}@%{branch} in PR [#%{pull_request_number}](%{pull_request_url}) by %{author} %{result} in %{duration}'
-    branch_template:
-      - 'Build [#%{build_number}](%{build_url}) ([%{commit}](%{compare_url})) of %{repository}@%{branch} by %{author} %{result} in %{duration}'
+after_failure:
+  - "curl -v -H 'Authorization: $DISCORD_WEBHOOK_TOKEN' -H 'User-Agent: bot' -H 'Content-Type: application/json' -d '{'content':'Failed building bot!'}' https://discordapp.com/api/webhooks/$DISCORD_WEBHOOK_CHANNEL_ID/$DISCORD_WEBHOOK_TOKEN"
+after_success:
+  - "curl -v -H 'Authorization: $DISCORD_WEBHOOK_TOKEN' -H 'User-Agent: bot' -H 'Content-Type: application/json' -d '{'content':'Built successful!'}' https://discordapp.com/api/webhooks/$DISCORD_WEBHOOK_CHANNEL_ID/$DISCORD_WEBHOOK_TOKEN"

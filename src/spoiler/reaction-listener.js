@@ -48,7 +48,8 @@ function reply(stored, reaction, user) {
     .then((channel) => {
       return channel.send(`Spoilers regarding **${stored.title}**: ${stored.spoiler}`);
     })
-    .catch(() => {
+    .catch((err) => {
+      logger(`Error sending message to ${user.username} due to ${err}`);
       return reaction.message.channel.send(`Cannot send private messages to ${user.username}`);
     });
 }
