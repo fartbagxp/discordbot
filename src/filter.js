@@ -1,6 +1,10 @@
 const _ = require('lodash');
+const debug = require('debug');
+
 const Broadcast = require('./broadcast');
 const listener = require('./spoiler/reaction-listener');
+
+const logger = debug('bot:filtered');
 
 const filter = {};
 
@@ -34,16 +38,18 @@ function setupFilter(msg, title, spoiler) {
     .catch(console.error);
 }
 
+/**
+ * This handler will handle all incoming messages.
+ * @param {Discord.Message} msg - A message in a channel to be filtered
+ */
 function handleMsg(msg) {
-  console.info('Caught a message in filter: ', msg.content);
-
   const split = _.split(msg.content, ':');
   if(split.length > 2) {
     const spoiler = _.trim(split[1]);
     if(spoiler === 'spoiler') {
       const title = _.trim(split[0]);
       const spoiler = _.join(_.slice(split, 2), ':');
-      console.info(`Channel ${msg.channel.name} User = ${msg.author} Title = ${title}, Spoiler = ${spoiler}`);
+      logger(`Channel ${msg.channel.name} User = ${msg.author} Title = ${title}, Spoiler = ${spoiler}`);
 
       // setup the filter
       setupFilter(msg, title, spoiler);
