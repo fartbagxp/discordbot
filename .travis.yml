@@ -30,7 +30,7 @@ deploy:
   local_dir: bot_upload
   skip_cleanup: true
   on:
-    node: '6'
+    node: '8'
   bucket: discordbot-builds
   region: us-east-1
 script:
