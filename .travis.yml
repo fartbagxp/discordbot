@@ -38,6 +38,6 @@ script:
   - mkdir -p bot_upload
   - mv latest.zip bot_upload/latest.zip
 after_failure:
-  - "curl -v -H 'Authorization: $DISCORD_WEBHOOK_TOKEN' -H 'User-Agent: bot' -H 'Content-Type: application/json' -d '{'content':'Failed building bot!'}' https://discordapp.com/api/webhooks/$DISCORD_WEBHOOK_CHANNEL_ID/$DISCORD_WEBHOOK_TOKEN"
+  - "curl -v -H \"Authorization: $DISCORD_WEBHOOK_TOKEN\" -H \"User-Agent: bot\" -H \"Content-Type: application/json\" -d '{"content":"Failed building bot!"}' https://discordapp.com/api/webhooks/$DISCORD_WEBHOOK_CHANNEL_ID/$DISCORD_WEBHOOK_TOKEN"
 after_success:
-  - "curl -v -H 'Authorization: $DISCORD_WEBHOOK_TOKEN' -H 'User-Agent: bot' -H 'Content-Type: application/json' -d '{'content':'Built successful!'}' https://discordapp.com/api/webhooks/$DISCORD_WEBHOOK_CHANNEL_ID/$DISCORD_WEBHOOK_TOKEN"
+  - "curl -v -H \"Authorization: $DISCORD_WEBHOOK_TOKEN\" -H \"User-Agent: bot\" -H \"Content-Type: application/json\" -d '{"content":"Built successfully!"}' https://discordapp.com/api/webhooks/$DISCORD_WEBHOOK_CHANNEL_ID/$DISCORD_WEBHOOK_TOKEN"
