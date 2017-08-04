@@ -13,7 +13,7 @@ addons:
       - g++-4.8
       - libgif-dev
 before_install:
-  - npm i -g npm@5.2.0
+  - npm i -g npm@5.3.0
 cache:
   directories:
     - "node_modules"
@@ -30,18 +30,16 @@ deploy:
   local_dir: bot_upload
   skip_cleanup: true
   on:
-    node: '6'
+    node: '8'
   bucket: discordbot-builds
   region: us-east-1
 script:
   - zip -r latest * -x node_modules/\*
   - mkdir -p bot_upload
   - mv latest.zip bot_upload/latest.zip
+after_failure:
+  - curl -v -H Authorization:$DISCORD_WEBHOOK_TOKEN -H User-Agent:bot -H Content-Type:application/json -d '{"content":"Build has failed!"}' https://discordapp.com/api/webhooks/$DISCORD_WEBHOOK_CHANNEL_ID/$DISCORD_WEBHOOK_TOKEN
+after_success:
+  - curl -v -H Authorization:$DISCORD_WEBHOOK_TOKEN -H User-Agent:bot -H Content-Type:application/json -d '{"content":"Build successfully built!"}' https://discordapp.com/api/webhooks/$DISCORD_WEBHOOK_CHANNEL_ID/$DISCORD_WEBHOOK_TOKEN
 notifications:
-  discord:
-    channels:
-      - $DISCORD_WEBHOOK_ID:$DISCORD_WEBHOOK_TOKEN
-    pull_request_template:
-      - 'Build [#%{build_number}](%{build_url}) ([%{commit}](%{compare_url})) of %{repository}@%{branch} in PR [#%{pull_request_number}](%{pull_request_url}) by %{author} %{result} in %{duration}'
-    branch_template:
-      - 'Build [#%{build_number}](%{build_url}) ([%{commit}](%{compare_url})) of %{repository}@%{branch} by %{author} %{result} in %{duration}'
+  email: false
