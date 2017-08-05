@@ -8,7 +8,10 @@ function cacheMessages(channels, messages) {
   _.forEach(messages, (message) => {
     const channel = channels.get(message.channelId);
     if(channel) {
-      return channel.fetchMessage(message.messageId);
+      channel.fetchMessage(message.messageId)
+        .catch(() => {
+          logger(`Message has probably been deleted from ${message.channelID}`);
+        });
     }
   });
 }
