@@ -38,8 +38,8 @@ script:
   - mkdir -p bot_upload
   - mv latest.zip bot_upload/latest.zip
 after_failure:
-  - curl -v -H Authorization:$DISCORD_WEBHOOK_TOKEN -H User-Agent:bot -H Content-Type:application/json -d '{"content":"Build has failed!"}' https://discordapp.com/api/webhooks/$DISCORD_WEBHOOK_CHANNEL_ID/$DISCORD_WEBHOOK_TOKEN
+  - curl -v -H User-Agent:bot -H Content-Type:application/json -d '{"content":"Build has failed on `$TRAVIS_BRANCH` on node version - $TRAVIS_NODE_VERSION!"}' https://discordapp.com/api/webhooks/$DISCORD_WEBHOOK_CHANNEL_ID/$DISCORD_WEBHOOK_TOKEN
 after_success:
-  - curl -v -H Authorization:$DISCORD_WEBHOOK_TOKEN -H User-Agent:bot -H Content-Type:application/json -d '{"content":"Build successfully built!"}' https://discordapp.com/api/webhooks/$DISCORD_WEBHOOK_CHANNEL_ID/$DISCORD_WEBHOOK_TOKEN
+  - $TRAVIS_NODE_VERSION = '8' && curl -v -H User-Agent:bot -H Content-Type:application/json -d '{"content":"Build successfully built on `$TRAVIS_BRANCH`!"}' https://discordapp.com/api/webhooks/$DISCORD_WEBHOOK_CHANNEL_ID/$DISCORD_WEBHOOK_TOKEN
 notifications:
   email: false
