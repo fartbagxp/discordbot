@@ -40,6 +40,6 @@ script:
 after_failure:
   - curl -v -H User-Agent:bot -H Content-Type:application/json -d '{"content":"Build has failed on `$TRAVIS_BRANCH` on node version - $TRAVIS_NODE_VERSION!"}' https://discordapp.com/api/webhooks/$DISCORD_WEBHOOK_CHANNEL_ID/$DISCORD_WEBHOOK_TOKEN
 after_success:
-  - $TRAVIS_NODE_VERSION = '8' && curl -v -H User-Agent:bot -H Content-Type:application/json -d '{"content":"Build successfully built on `$TRAVIS_BRANCH`!"}' https://discordapp.com/api/webhooks/$DISCORD_WEBHOOK_CHANNEL_ID/$DISCORD_WEBHOOK_TOKEN
+  - test $TRAVIS_NODE_VERSION = '8' && curl -v -H User-Agent:bot -H Content-Type:application/json -d '{"content":"Build successfully built on `$TRAVIS_BRANCH`!"}' https://discordapp.com/api/webhooks/$DISCORD_WEBHOOK_CHANNEL_ID/$DISCORD_WEBHOOK_TOKEN
 notifications:
   email: false
