@@ -1,7 +1,9 @@
 const _ = require('lodash');
 const Promise = require('bluebird');
-const redis = require('redis');
 const debug = require('debug');
+const redis = require('redis');
+
+const config = require('../config');
 
 const logger = debug('bot:redis');
 
@@ -18,7 +20,10 @@ c.reactionKey = 'reaction';
 
 function connect() {
   if(!c.client) {
-    c.client = redis.createClient();
+    c.client = redis.createClient({
+      host: config.redisHost,
+      port: config.redisPort
+    });
 
     c.client.on('ready', () => {
       logger('Connection to redis is redis.');

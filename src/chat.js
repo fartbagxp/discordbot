@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const CacheMessages = require('./spoiler/cache-messages');
 const Broadcast = require('./broadcast');
+const config = require('./config');
 const debug = require('debug');
 
 const logger = debug('bot:chat');
@@ -56,8 +57,8 @@ client.on('error', (err) => {
 
 const chat = {};
 
-chat.start = (token) => {
-  client.login(token);
+chat.start = () => {
+  client.login(config.token);
 };
 
 chat.reply = (msg) => {
