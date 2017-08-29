@@ -3,6 +3,7 @@ const CacheMessages = require('./spoiler/cache-messages');
 const Broadcast = require('./broadcast');
 const config = require('./config');
 const debug = require('debug');
+require('./filter');
 
 const logger = debug('bot:chat');
 
