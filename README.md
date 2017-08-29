@@ -25,13 +25,13 @@ To generate the proper link for the permission, you should use the [permission c
 
 ### How to run
 
-Once you cloned this project, you can run it using the following commands.
+1. Download [Docker](https://www.docker.com/).
 
-Run `npm install`
+1. Run `sh .docker/docker-rebuild.sh`
 
-Run `npm start`
+1. Run `sh .docker/docker-start.sh`
 
-Reaction messages are stored in [Redis](https://redis.io) so that upon restarting, the bot will fetch previous spoilers and sync itself up with it.
+Subsequent runs after code change can simply run `docker-start.sh` again.
 
 ## Usage
 
