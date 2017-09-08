@@ -40,7 +40,7 @@ client.on('disconnect', (err) => {
   if(err.code === 1000) {
     client.destroy()
       .then(() => {
-        client.login(''); // TODO: need token here.
+        client.login(config.token);
       })
       .catch((err) => {
         logger(`Unable to reconnect from a disconnection. Error is ${err}`);
