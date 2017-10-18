@@ -27,6 +27,7 @@
     "debug": "3.0.1",
     "discord.js": "11.1.0",
     "dotenv": "4.0.0",
+    "lodash": "4.17.4",
     "node-opus": "0.2.6",
     "redis": "2.8.0"
   },
