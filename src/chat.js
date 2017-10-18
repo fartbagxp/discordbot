@@ -13,7 +13,9 @@ client.on('ready', () => {
   logger(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`);
   logger(`Logged in as ${client.user.tag}!`);
   client.channels.map((channel) => {
-    logger(`Joining: ${channel.guild.name} - ${channel.name}`);
+    if(channel.guild) {
+      logger(`Joining: ${channel.guild.name} - ${channel.name}`);
+    }
   });
 
   // cache a list of messages found in the database
