@@ -1,6 +1,7 @@
 const _ = require('lodash');
 const debug = require('debug');
 
+const config = require('./config');
 const Broadcast = require('./broadcast');
 const listener = require('./spoiler/reaction-listener');
 
@@ -18,8 +19,8 @@ function setupFilter(msg, title, spoiler) {
   // Note: apparently not all of the guild emotes are available to you.
   // This needs to be stored in a configuration somewhere that we don't have access to all emotes.
   // const emote = msg.guild.emojis.random();
-  const emote = '311030342096125953';
-  const emoteText = '<:kffc2Ply:311030342096125953>';
+  const emote = config.emote;
+  const emoteText = config.emoteText;
 
   msg.delete()
     .catch(console.error)
