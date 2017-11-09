@@ -11,7 +11,7 @@ RUN apk add --no-cache make gcc g++ python
 
 # cache nodejs
 COPY package.json .
-RUN cd /app && npm install --production
+RUN npm install --production
 COPY . .
 
 EXPOSE 8080
