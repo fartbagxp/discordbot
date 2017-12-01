@@ -13,6 +13,12 @@ filter.stop = () => {
   Broadcast.incomingEE.off(Broadcast.events.MessageEvent, handleMsg);
 };
 
+function help(msg) {
+  return msg.reply(
+    'You can generate a spoiler using the following command: `<title>:spoiler:<spoiler-text>`')
+    .catch(console.error);
+}
+
 function setupFilter(msg, title, spoiler) {
 
   // setup a random emote for the message
@@ -41,9 +47,15 @@ function setupFilter(msg, title, spoiler) {
 
 /**
  * This handler will handle all incoming messages.
+ *
  * @param {Discord.Message} msg - A message in a channel to be filtered
  */
 function handleMsg(msg) {
+
+  if(msg.content === '!help') {
+    return help(msg).catch(console.error);
+  }
+
   const split = _.split(msg.content, ':');
   if(split.length > 2) {
     const spoiler = _.trim(split[1]);
