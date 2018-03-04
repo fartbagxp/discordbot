@@ -19,7 +19,7 @@ connect();
 c.reactionKey = 'reaction';
 
 function connect() {
-  if(!c.client) {
+  if (!c.client) {
     c.client = redis.createClient({
       host: config.redisHost,
       port: config.redisPort
@@ -41,7 +41,7 @@ function connect() {
       logger('Connection to redis is closed.');
     });
 
-    c.client.on('error', (err) => {
+    c.client.on('error', err => {
       logger(`Redis error caught: ${err}`);
     });
   }
@@ -51,11 +51,20 @@ function connect() {
  * Add a reaction message to the database.
  */
 c.addReactionMessage = (channelId, messageId, emoteId, title, spoiler) => {
-  if(!c.client) {
+  if (!c.client) {
     connect();
   }
   const key = `${c.reactionKey}:${channelId}:${messageId}`;
-  const value = ['channel', channelId, 'emote', emoteId, 'title', title, 'spoiler', spoiler];
+  const value = [
+    'channel',
+    channelId,
+    'emote',
+    emoteId,
+    'title',
+    title,
+    'spoiler',
+    spoiler
+  ];
   return c.client.hmsetAsync(key, value);
 };
 
@@ -63,7 +72,7 @@ c.addReactionMessage = (channelId, messageId, emoteId, title, spoiler) => {
  * Get a reaction message from the database.
  */
 c.getReactionMessage = (channelId, messageId) => {
-  if(!c.client) {
+  if (!c.client) {
     connect();
   }
   const key = `${c.reactionKey}:${channelId}:${messageId}`;
@@ -74,21 +83,18 @@ c.getReactionMessage = (channelId, messageId) => {
  * Get a list of reaction messages from each of the channels that we should be listening to
  */
 c.getAllReactionMessages = () => {
-  if(!c.client) {
+  if (!c.client) {
     connect();
   }
   const key = `${c.reactionKey}:*`;
-  return c.client.keysAsync(key)
-    .then((messages) => {
-      return transformKeys(messages);
-    });
+  return c.client.keysAsync(key).then(messages => transformKeys(messages));
 };
 
 function transformKeys(messages) {
   const transformed = [];
-  _.forEach(messages, (message) => {
+  _.forEach(messages, message => {
     const split = message.split(':');
-    if(split.length >= 3) {
+    if (split.length >= 3) {
       transformed.push({
         channelId: split[1],
         messageId: split[2]

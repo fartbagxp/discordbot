@@ -1,4 +1,3 @@
-const chat = require('./src/chat');
+const app = require('./src/app');
 
-chat.start();
-
+app.start();

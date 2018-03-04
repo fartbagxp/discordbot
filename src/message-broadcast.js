@@ -9,7 +9,6 @@ broadcast.incomingEE = new EventEmitter();
 broadcast.outgoingEE = new EventEmitter();
 
 broadcast.events = {
-
   // IncomingMessageEvent signifies all incoming messages to the bot
   IncomingMessageEvent: 'IncomingMessageEvent',
 

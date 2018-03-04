@@ -3,7 +3,6 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const config = {
-
   // Discord bot token
   token: process.env.DISCORD_BOT_TOKEN || '',
 
@@ -19,7 +18,7 @@ const config = {
 
   // Application specifics
   emote: process.env.EMOTE || '',
-  emoteText: process.env.EMOTE_TEXT || '',
+  emoteText: process.env.EMOTE_TEXT || ''
 };
 
 module.exports = config;

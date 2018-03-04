@@ -1,4 +1,4 @@
-const client = require('../db/client');
+const client = require('../../db/client');
 const debug = require('debug');
 
 const logger = debug('bot:reaction');
@@ -8,20 +8,20 @@ const listener = {};
 /**
  * Add the message to the database so we can retrieve it later.
  */
-listener.add = (msg, emote, title, spoiler) => {
-  return client.addReactionMessage(msg.channel.id, msg.id, emote, title, spoiler);
-};
+listener.add = (msg, emote, title, spoiler) =>
+  client.addReactionMessage(msg.channel.id, msg.id, emote, title, spoiler);
 
 /**
  * React and whisper to the user if they reacted to the spoiler.
  */
 listener.react = (reaction, user) => {
-  client.getReactionMessage(reaction.message.channel.id, reaction.message.id)
-    .then((message) => {
+  client
+    .getReactionMessage(reaction.message.channel.id, reaction.message.id)
+    .then(message => {
       logger(`Message found in reaction: ${JSON.stringify(message, null, 2)}`);
       return reply(message, reaction, user);
     })
-    .catch((err) => {
+    .catch(err => {
       logger(`Error attempting to reply with reaction: ${err}`);
     });
 };
@@ -35,24 +35,26 @@ listener.react = (reaction, user) => {
  * @param {User} user - The user class from Discord.JS
  */
 function reply(stored, reaction, user) {
-  if(!stored) {
+  if (!stored) {
     return;
   }
 
-  if(stored.emote !== reaction.emoji.id) {
+  if (stored.emote !== reaction.emoji.id) {
     return;
   }
 
   // send the user a private message if DM channels are available
-  return user.createDM()
-    .then((channel) => {
-      return channel.send(`Spoilers regarding **${stored.title}**: ${stored.spoiler}`);
-    })
-    .catch((err) => {
+  return user
+    .createDM()
+    .then(channel =>
+      channel.send(`Spoilers regarding **${stored.title}**: ${stored.spoiler}`)
+    )
+    .catch(err => {
       logger(`Error sending message to ${user.username} due to ${err}`);
-      return reaction.message.channel.send(`Cannot send private messages to ${user.username}`);
+      return reaction.message.channel.send(
+        `Cannot send private messages to ${user.username}`
+      );
     });
 }
-
 
 module.exports = listener;
